@@ -18,6 +18,15 @@ export default class NavBar extends Component {
     this.props.onSearch(this.state.searchTerm.trim().replace(/\s+/g, " "));
   };
 
+  closeNavbar = () => {
+    const navbarToggler = document.getElementById("navbarTogglerDemo02");
+    if (navbarToggler && navbarToggler.classList.contains("show")) {
+      new window.bootstrap.Collapse(navbarToggler, {
+        toggle: true,
+      });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -40,42 +49,42 @@ export default class NavBar extends Component {
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/">
+                  <NavLink className="nav-link" to="/" onClick={this.closeNavbar}>
                     Home
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/business">
+                  <NavLink className="nav-link" to="/business" onClick={this.closeNavbar}>
                     Business
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/entertainment">
+                  <NavLink className="nav-link" to="/entertainment" onClick={this.closeNavbar}>
                     Entertainment
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/health">
+                  <NavLink className="nav-link" to="/health" onClick={this.closeNavbar}>
                     Health
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/science">
+                  <NavLink className="nav-link" to="/science" onClick={this.closeNavbar}>
                     Science
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/sports">
+                  <NavLink className="nav-link" to="/sports" onClick={this.closeNavbar}>
                     Sports
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/technology">
+                  <NavLink className="nav-link" to="/technology" onClick={this.closeNavbar}>
                     Technology
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/about">
+                  <NavLink className="nav-link" to="/about" onClick={this.closeNavbar}>
                     About Us
                   </NavLink>
                 </li>
@@ -93,7 +102,7 @@ export default class NavBar extends Component {
                   value={this.state.searchTerm}
                   onChange={this.handleChange}
                 />
-                <button className="btn btn-outline-danger" type="submit">
+                <button className="btn btn-outline-danger" type="submit" onClick={this.closeNavbar}>
                   Search
                 </button>
               </form>

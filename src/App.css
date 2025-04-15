@@ -1,3 +1,7 @@
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .accordion-button:focus {
     box-shadow: none;
 }
@@ -23,6 +27,29 @@
     position: absolute;
     left: 0;
     bottom: 0;
+}
+
+.width100{
     width: 100%;
-    z-index: 2;
+}
+
+.aboutFooter{
+    position: relative;
+    bottom: 0;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.pl10{
+    padding-left: 10px;
+}
+
+.pd10{
+    padding: 10px;
 }

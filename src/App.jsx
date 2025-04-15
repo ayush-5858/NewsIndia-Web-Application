@@ -33,7 +33,7 @@ export default class App extends Component {
     localStorage.setItem("lastPath", path);
   };
 
-  pageSize = 12;
+  pageSize = 50;
   apikeys = [import.meta.env.VITE_NEWS_API_1, import.meta.env.VITE_NEWS_API_2];
 
   state = {

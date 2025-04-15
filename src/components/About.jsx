@@ -5,12 +5,12 @@ export default class About extends Component {
   render() {
     return (
       <>
-        <div className="container" style={{ marginTop: "73px" }}>
+        <div className="container" style={{ marginTop: "73px", marginBottom: "103px"}}>
           <div className="accordion" id="accordionExample">
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button"
+                  className="accordion-button pl10"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseOne"
@@ -25,7 +25,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse show"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>News is an essential part of our daily lives.</strong>{" "}
                   It is the medium through which we learn about important events
                   happening locally, nationally, and globally. These events can
@@ -42,7 +42,7 @@ export default class About extends Component {
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button pl10 collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseTwo"
@@ -57,7 +57,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>
                     In an era of rapid technological advancements and an
                     ever-changing global landscape,
@@ -76,7 +76,7 @@ export default class About extends Component {
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button pl10 collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseThree"
@@ -91,7 +91,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>
                     A strong democracy depends on an informed citizenry,
                   </strong>{" "}
@@ -111,7 +111,7 @@ export default class About extends Component {
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button pl10 collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseFour"
@@ -126,7 +126,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>
                     Consuming news isn't just about staying updated—it's about
                     engaging with the information in a way that challenges us to
@@ -145,7 +145,7 @@ export default class About extends Component {
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button pl10 collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseFive"
@@ -160,7 +160,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>
                     Unlike traditional news outlets, digital platforms provide
                     real-time updates.
@@ -179,7 +179,7 @@ export default class About extends Component {
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button pl10 collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseSix"
@@ -194,7 +194,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>
                     One of the most critical roles of the news is to provide
                     information that promotes public safety and awareness.
@@ -213,7 +213,7 @@ export default class About extends Component {
             <div className="accordion-item">
               <h2 className="accordion-header">
                 <button
-                  className="accordion-button collapsed"
+                  className="accordion-button pl10 collapsed"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseSeven"
@@ -228,7 +228,7 @@ export default class About extends Component {
                 className="accordion-collapse collapse"
                 data-bs-parent="#accordionExample"
               >
-                <div className="accordion-body">
+                <div className="accordion-body text-justify pd10">
                   <strong>
                     Understanding the state of the economy and current business
                     trends is essential for making sound financial decisions.
@@ -242,9 +242,35 @@ export default class About extends Component {
                 </div>
               </div>
             </div>
+            <div className="accordion-item">
+              <h2 className="accordion-header">
+                <button
+                  className="accordion-button pl10 collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseEight"
+                  aria-expanded="false"
+                  aria-controls="collapseEight"
+                >
+                  A News Category for Everyone
+                </button>
+              </h2>
+              <div
+                id="collapseEight"
+                className="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div className="accordion-body text-justify pd10">
+                  <strong>
+                  Every individual has unique interests and needs when it comes to news.
+                  </strong>{" "}
+                  While some may be interested in politics, others might prefer sports, entertainment, or health updates. NewsIndia organizes news into various categories such as business, sports, entertainment, health, technology, and science, allowing users to easily access the information that matters most to them. Whether you want to stay informed about stock market movements, or learn about the latest medical advancements, NewsIndia has you covered with well-organized, category-specific content.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <Footer />
+        <Footer isFixed={false} />
       </>
     );
   }

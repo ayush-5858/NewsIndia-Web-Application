@@ -172,7 +172,7 @@ export default class News extends Component {
             </InfiniteScroll>
           )}
           {!this.state.hasMore && this.state.articles.length > 0 && (
-            <div className="footer-fixed">
+            <div className="footer-fixed width100">
               <Footer />
             </div>
           )}

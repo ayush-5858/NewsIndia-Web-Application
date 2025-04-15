@@ -1,12 +1,13 @@
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
 
-  const { category, country, searchTerm, page, pageSize, apiKey } = req.query;
+  const { category, country, searchTerm, q,  page, pageSize, apiKey } = req.query;
+  const actualSearchTerm = searchTerm || q;
 
   const params = new URLSearchParams();
   if (country) params.append("country", country);
   if (category) params.append("category", category);
-  if (searchTerm) params.append("q", searchTerm); // Only append if non-empty
+  if (actualSearchTerm) params.append("q", actualSearchTerm);
   if (page) params.append("page", page);
   if (pageSize) params.append("pageSize", pageSize);
   if (apiKey) params.append("apiKey", apiKey);

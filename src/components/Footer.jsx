@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 
 export default class Footer extends Component {
   render() {
+    const { isFixed = true } = this.props; // default true
     return (
-      <footer className="bg-dark text-center text-white footer-fixed">
+      <footer className={`bg-dark text-center text-white ${isFixed ? "footer-fixed" : "aboutFooter"} width100`}>
         <section>
           <NavLink
             className="btn rounded-circle text-primary btn-outline-light btn-floating m-2"
