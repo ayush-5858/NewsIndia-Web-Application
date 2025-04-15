@@ -32,10 +32,17 @@ export default class News extends Component {
   fetchWithFallback = async (key1, key2, page) => {
     const isVercel = window.location.hostname.includes("vercel.app");
   
-    const buildUrl = (key) =>
-      isVercel
-        ? `/api/news?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&page=${page}&pageSize=${this.props.pageSize}&apiKey=${key}`
-        : `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&page=${page}&pageSize=${this.props.pageSize}&apiKey=${key}`;
+    const buildUrl = (key) => {
+      const baseUrl = isVercel
+        ? `/api/news?country=${this.props.country}&category=${this.props.category}`
+        : `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}`;
+  
+      const searchParam = this.props.searchTerm
+        ? `&q=${encodeURIComponent(this.props.searchTerm)}`
+        : "";
+  
+      return `${baseUrl}${searchParam}&page=${page}&pageSize=${this.props.pageSize}&apiKey=${key}`;
+    };
   
     try {
       const res1 = await fetch(buildUrl(key1));
@@ -50,6 +57,7 @@ export default class News extends Component {
       return null;
     }
   };
+  
   
   
 
