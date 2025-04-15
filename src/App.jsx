@@ -19,12 +19,6 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
-    if (window.location.pathname !== "/") {
-      window.location.replace("/");
-    }
-  }
-
   handleSearch = (term) => {
     this.setState({ searchTerm: term });
   };
@@ -33,7 +27,7 @@ export default class App extends Component {
     localStorage.setItem("lastPath", path);
   };
 
-  pageSize = 50;
+  pageSize = 15;
   apikeys = [import.meta.env.VITE_NEWS_API_1, import.meta.env.VITE_NEWS_API_2];
 
   state = {
