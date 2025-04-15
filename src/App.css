@@ -1,0 +1,28 @@
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e7aaaa;
+}
+
+.accordion-item {
+    border: 1px solid #891b1b;
+}
+
+.accordion-body {
+    background-color: #fff2f2;
+}
+
+.news-wrapper {
+    position: relative;
+    padding-bottom: 85px;
+}
+
+.footer-fixed {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+}
