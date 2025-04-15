@@ -29,21 +29,19 @@ export default class News extends Component {
     };
   }
 
-  fetchWithFallback = async (url1, url2) => {
+  fetchWithFallback = async (page) => {
+    const { category, country, pageSize, searchTerm } = this.props;
     try {
-      const response1 = await fetch(url1);
-      if (response1.status === 429) {
-        const response2 = await fetch(url2);
-        if (response2.status === 429)
-          return <NewsNotFound message={this.props.searchTerm} />;
-        return await response2.json();
-      }
-      return await response1.json();
+      const res = await fetch(
+        `/api/news?category=${category}&country=${country}&page=${page}&pageSize=${pageSize}&q=${searchTerm || ""}`
+      );
+      return await res.json();
     } catch (error) {
-      console.error("Fetch failed:", error);
-      return <NewsNotFound message={this.props.searchTerm} />;
+      console.error("Proxy fetch failed:", error);
+      return null;
     }
   };
+  
 
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -51,12 +49,11 @@ export default class News extends Component {
 
   async updateNews() {
     this.props.setProgress(10);
-    const [key1, key2] = this.props.apikeys;
-    const url1 = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&apiKey=${key1}&page=1&pagesize=${this.props.pageSize}`;
-    const url2 = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&apiKey=${key2}&page=1&pagesize=${this.props.pageSize}`;
     this.setState({ loading: true });
     this.props.setProgress(30);
-    const parsedData = await this.fetchWithFallback(url1, url2);
+  
+    const parsedData = await this.fetchWithFallback(1);
+  
     this.props.setProgress(70);
     if (!parsedData || !parsedData.articles) {
       this.setState({ articles: [], loading: false, hasMore: false });
@@ -70,6 +67,7 @@ export default class News extends Component {
     }
     this.props.setProgress(100);
   }
+  
 
   async componentDidMount() {
     this.updateNews();
@@ -88,20 +86,20 @@ export default class News extends Component {
 
   fetchMoreData = async () => {
     const nextPage = this.state.page + 1;
-    const [key1, key2] = this.props.apikeys;
-    const url1 = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&apiKey=${key1}&page=${nextPage}&pagesize=${this.props.pageSize}`;
-    const url2 = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&apiKey=${key2}&page=${nextPage}&pagesize=${this.props.pageSize}`;
-    const parsedData = await this.fetchWithFallback(url1, url2);
+    const parsedData = await this.fetchWithFallback(nextPage);
+  
     if (!parsedData || !parsedData.articles) {
       this.setState({ hasMore: false });
       return;
     }
+  
     this.setState((prevState) => ({
       articles: prevState.articles.concat(parsedData.articles),
       page: nextPage,
       hasMore: parsedData.articles.length > 0,
     }));
   };
+  
 
   render() {
     return (
