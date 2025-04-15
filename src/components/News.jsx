@@ -29,18 +29,28 @@ export default class News extends Component {
     };
   }
 
-  fetchWithFallback = async (page) => {
-    const { category, country, pageSize, searchTerm } = this.props;
+  fetchWithFallback = async (key1, key2, page) => {
+    const isVercel = window.location.hostname.includes("vercel.app");
+  
+    const buildUrl = (key) =>
+      isVercel
+        ? `/api/news?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&page=${page}&pageSize=${this.props.pageSize}&apiKey=${key}`
+        : `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&q=${this.props.searchTerm}&page=${page}&pageSize=${this.props.pageSize}&apiKey=${key}`;
+  
     try {
-      const res = await fetch(
-        `/api/news?category=${category}&country=${country}&page=${page}&pageSize=${pageSize}&q=${searchTerm || ""}`
-      );
-      return await res.json();
+      const res1 = await fetch(buildUrl(key1));
+      if (!res1.ok) {
+        const res2 = await fetch(buildUrl(key2));
+        if (!res2.ok) return null;
+        return await res2.json();
+      }
+      return await res1.json();
     } catch (error) {
-      console.error("Proxy fetch failed:", error);
+      console.error("Fetch failed:", error);
       return null;
     }
   };
+  
   
 
   capitalizeFirstLetter = (string) => {
@@ -49,12 +59,13 @@ export default class News extends Component {
 
   async updateNews() {
     this.props.setProgress(10);
+    const [key1, key2] = this.props.apikeys;
     this.setState({ loading: true });
     this.props.setProgress(30);
-  
-    const parsedData = await this.fetchWithFallback(1);
-  
+
+    const parsedData = await this.fetchWithFallback(key1, key2, 1);
     this.props.setProgress(70);
+
     if (!parsedData || !parsedData.articles) {
       this.setState({ articles: [], loading: false, hasMore: false });
     } else {
@@ -65,9 +76,9 @@ export default class News extends Component {
         hasMore: parsedData.articles.length > 0,
       });
     }
+
     this.props.setProgress(100);
   }
-  
 
   async componentDidMount() {
     this.updateNews();
@@ -86,20 +97,20 @@ export default class News extends Component {
 
   fetchMoreData = async () => {
     const nextPage = this.state.page + 1;
-    const parsedData = await this.fetchWithFallback(nextPage);
-  
+    const [key1, key2] = this.props.apikeys;
+
+    const parsedData = await this.fetchWithFallback(key1, key2, nextPage);
     if (!parsedData || !parsedData.articles) {
       this.setState({ hasMore: false });
       return;
     }
-  
+
     this.setState((prevState) => ({
       articles: prevState.articles.concat(parsedData.articles),
       page: nextPage,
       hasMore: parsedData.articles.length > 0,
     }));
   };
-  
 
   render() {
     return (
